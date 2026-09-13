@@ -1,11 +1,15 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  poweredByHeader: false,
-  turbopack: {
-    root: process.cwd(),
+  output: 'export',
+  images: {
+    unoptimized: true,
   },
+  experimental: {
+    turbopack: {
+      root: process.cwd()
+    }
+  }
 };
 
 export default nextConfig;
