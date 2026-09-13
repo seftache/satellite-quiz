@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Shield } from 'lucide-react';
+import { Shield, Check, Cpu } from 'lucide-react';
 
 interface AnalysisLoaderProps {
   onComplete: () => void;
 }
 
 const phases = [
-  { label: 'Analyzing your profile...', target: 40 },
-  { label: 'Building your personalized roadmap...', target: 80 },
-  { label: 'Finalizing recommendations...', target: 100 },
+  { label: 'CALIBRATING CURRICULUM PREREQUISITES...', target: 35, detail: 'Validating Linux & networking baseline...' },
+  { label: 'SYNTHESIZING LAB SIMULATIONS & EXAM DOMAINS...', target: 75, detail: 'Cross-referencing CEH v13 & CompTIA Security+...' },
+  { label: 'FINALIZING PERSONALIZED OFFENSIVE ROADMAP...', target: 100, detail: 'Connecting tailored modules on ethicalhackerprep.com...' },
 ];
 
 export default function AnalysisLoader({ onComplete }: AnalysisLoaderProps) {
@@ -19,23 +19,21 @@ export default function AnalysisLoader({ onComplete }: AnalysisLoaderProps) {
   const [phaseIndex, setPhaseIndex] = useState(0);
 
   useEffect(() => {
-    const totalDuration = 2000; // 2 seconds
+    const totalDuration = 2000;
     const phaseLength = totalDuration / phases.length;
-    const interval = 30; // update every 30ms for smooth animation
+    const interval = 25;
 
     let elapsed = 0;
 
     const timer = setInterval(() => {
       elapsed += interval;
 
-      // Calculate which phase we're in
       const currentPhaseIdx = Math.min(
         Math.floor(elapsed / phaseLength),
         phases.length - 1
       );
       setPhaseIndex(currentPhaseIdx);
 
-      // Calculate progress within current phase
       const phaseStart = currentPhaseIdx > 0 ? phases[currentPhaseIdx - 1].target : 0;
       const phaseEnd = phases[currentPhaseIdx].target;
       const phaseElapsed = elapsed - currentPhaseIdx * phaseLength;
@@ -47,7 +45,7 @@ export default function AnalysisLoader({ onComplete }: AnalysisLoaderProps) {
       if (elapsed >= totalDuration) {
         clearInterval(timer);
         setProgress(100);
-        setTimeout(onComplete, 200);
+        setTimeout(onComplete, 220);
       }
     }, interval);
 
@@ -55,55 +53,57 @@ export default function AnalysisLoader({ onComplete }: AnalysisLoaderProps) {
   }, [onComplete]);
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-12">
+    <section className="min-h-screen flex items-center justify-center px-4 py-16 cyber-grid-bg">
       <motion.div
-        className="w-full max-w-md mx-auto text-center"
-        initial={{ opacity: 0, scale: 0.95 }}
+        className="relative w-full max-w-lg mx-auto glass-panel p-8 sm:p-10 rounded-2xl shadow-2xl border border-brand-border"
+        initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
       >
-        {/* Spinning shield icon */}
-        <div className="relative w-20 h-20 mx-auto mb-8">
-          <motion.div
-            className="w-20 h-20 flex items-center justify-center rounded-full bg-brand-surface border border-brand-border"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-          >
-            <Shield className="w-10 h-10 text-brand-red drop-shadow-red-glow" />
-          </motion.div>
+        {/* Filmbot Frame Corners */}
+        <div className="frame-corner frame-corner-tl" />
+        <div className="frame-corner frame-corner-tr" />
+        <div className="frame-corner frame-corner-bl" />
+        <div className="frame-corner frame-corner-br" />
 
-          {/* Scan line overlay */}
-          <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
-            <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-red-500/40 to-transparent animate-scan-line" />
+        {/* Radar / Core Animation */}
+        <div className="relative w-24 h-24 mx-auto mb-8">
+          <div className="absolute inset-0 rounded-full bg-red-600/10 animate-ping" />
+          <div className="relative w-24 h-24 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center shadow-xl">
+            <Cpu className="w-10 h-10 text-brand-red animate-pulse" />
+          </div>
+          {/* Subtle rotating radar line */}
+          <div className="absolute inset-0 rounded-full border border-red-500/20 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 left-1/2 w-0.5 h-1/2 bg-gradient-to-t from-red-500 to-transparent origin-bottom animate-spin" style={{ animationDuration: '3s' }} />
           </div>
         </div>
 
-        {/* Phase label */}
-        <motion.p
-          key={phaseIndex}
-          className="text-lg font-medium text-white mb-6 animate-glitch"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          style={{ animationDuration: '0.3s', animationIterationCount: '3' }}
-        >
-          {phases[phaseIndex].label}
-        </motion.p>
+        {/* Phase Header */}
+        <div className="text-center mb-6">
+          <span className="tech-superscript text-brand-red-light inline-block mb-2">
+            [ ENGINE SYNTHESIS IN PROGRESS ]
+          </span>
+          <h2 className="text-lg font-mono font-bold text-white tracking-wide">
+            {phases[phaseIndex].label}
+          </h2>
+          <p className="text-xs font-mono text-brand-muted mt-1">
+            {phases[phaseIndex].detail}
+          </p>
+        </div>
 
-        {/* Progress bar */}
-        <div className="w-full h-2.5 bg-brand-surface-alt rounded-full overflow-hidden mb-4">
+        {/* High-End Progress Bar */}
+        <div className="w-full h-2.5 bg-brand-surface-alt rounded-full overflow-hidden border border-brand-border/60 mb-4">
           <motion.div
             className="h-full rounded-full animate-progress-shimmer"
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.1 }}
+            style={{ width: `${progress}%` }}
           />
         </div>
 
-        {/* Percentage */}
-        <p className="text-sm text-brand-subtle font-mono">
-          {Math.round(progress)}%
-        </p>
+        {/* Hex and percentage metrics */}
+        <div className="flex justify-between items-center text-xs font-mono text-brand-subtle">
+          <span>MEM: 0x8FA4 // READY</span>
+          <span className="text-white font-bold">{Math.round(progress)}%</span>
+        </div>
       </motion.div>
     </section>
   );
