@@ -3,77 +3,26 @@
 @tailwind utilities;
 
 :root {
-  --background: #070708;
-  --foreground: #f3f4f6;
-  --brand-red: #dc2626;
-  --brand-red-glow: rgba(220, 38, 38, 0.4);
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --brand: #dc2626;
+  --brand-hover: #b91c1c;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  overflow-x: hidden;
-  selection-background-color: #dc2626;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-::selection {
-  background: #dc2626;
-  color: #ffffff;
+/* Very simple fade-in for smooth transitions */
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
-/* Filmbot Corner Frames */
-.frame-corner {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-color: #dc2626;
-  pointer-events: none;
-  z-index: 20;
-}
-.frame-corner-tl { top: 0; left: 0; border-top: 1.5px solid #dc2626; border-left: 1.5px solid #dc2626; }
-.frame-corner-tr { top: 0; right: 0; border-top: 1.5px solid #dc2626; border-right: 1.5px solid #dc2626; }
-.frame-corner-bl { bottom: 0; left: 0; border-bottom: 1.5px solid #dc2626; border-left: 1.5px solid #dc2626; }
-.frame-corner-br { bottom: 0; right: 0; border-bottom: 1.5px solid #dc2626; border-right: 1.5px solid #dc2626; }
-
-/* Filmbot Technical Superscripts */
-.u-font-superscript {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-/* Ambient Film Glow */
-.cinema-glow {
-  background: radial-gradient(circle at 50% 30%, rgba(220, 38, 38, 0.15) 0%, transparent 70%);
-}
-
-/* Image Grain Overlay */
-.cinema-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #0f1115;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
-}
-
-.cinema-card:hover {
-  border-color: rgba(220, 38, 38, 0.5);
-}
-
-/* Ticker Marquee */
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: ticker 30s linear infinite;
-}
-.ticker-track:hover {
-  animation-play-state: paused;
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
