@@ -118,7 +118,7 @@ export const metadata: Metadata = {
   },
 
   other: {
-    'google-site-verification': 'REMPLACER_PAR_VOTRE_CODE_GOOGLE_SEARCH_CONSOLE',
+    'google-site-verification': 'googleb40446a29b413213',
   },
 };
 

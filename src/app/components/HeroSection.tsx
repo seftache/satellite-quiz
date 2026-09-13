@@ -3,18 +3,18 @@
 export default function HeroSection({ onStart }: { onStart: () => void }) {
   return (
     <div className="min-h-screen flex flex-col fade-in">
-      {/* Simple Header */}
+      {/* Header */}
       <header className="w-full px-8 py-6 flex items-center justify-between border-b border-white/5">
         <div className="font-semibold text-lg tracking-tight">Ethical Hacker Prep</div>
         <a 
           href="https://ethicalhackerprep.com" 
           className="text-sm text-gray-400 hover:text-white transition-colors"
         >
-          Retour au site principal
+          Main Platform →
         </a>
       </header>
 
-      {/* Main Content - Ultra Minimal (Brilliant Style) */}
+      {/* Hero */}
       <main className="flex-1 flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto w-full">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-white">
           The modern way to master <br/>
@@ -29,8 +29,10 @@ export default function HeroSection({ onStart }: { onStart: () => void }) {
           onClick={onStart}
           className="bg-red-600 hover:bg-red-700 text-white px-10 py-5 rounded-2xl font-semibold text-lg transition-transform hover:scale-105 shadow-lg shadow-red-600/20"
         >
-          Générer ma Roadmap
+          Generate My Roadmap
         </button>
+
+        <p className="text-sm text-gray-500 mt-4">60 seconds · No registration required · 100% free</p>
       </main>
     </div>
   );
