@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   Design tokens — mirrored from main platform
+   ============================================ */
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* Selection accent — matches main platform */
+::selection {
+  background-color: #dc2626;
+  color: white;
+}
+
+/* ============================================
+   Animations — copied from main platform
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.animate-glitch {
+  animation: glitch 1s infinite;
+}
+
+@keyframes redPulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-red-pulse {
+  animation: redPulse 2s ease-in-out infinite;
+}
+
+.drop-shadow-red-glow {
+  filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.7));
+}
+
+/* ============================================
+   Progress bar animation
+   ============================================ */
+@keyframes progressShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-progress-shimmer {
+  background: linear-gradient(90deg, #dc2626 0%, #f87171 50%, #dc2626 100%);
+  background-size: 200% 100%;
+  animation: progressShimmer 1.5s ease-in-out infinite;
+}
+
+/* ============================================
+   Scan line effect for loader
+   ============================================ */
+@keyframes scanLine {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.animate-scan-line {
+  animation: scanLine 2s linear infinite;
+}
